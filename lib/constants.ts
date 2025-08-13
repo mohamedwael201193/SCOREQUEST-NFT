@@ -8,13 +8,13 @@ export const GAME_CONFIG = {
 
 export const CONTRACT_CONFIG = {
   ADDRESS: "0x16FAb074954D2eE5A5Dbc4Be8781638612C57250",
-  CHAIN_ID: 41454, // Monad Testnet
+  CHAIN_ID: 10143, // Monad Testnet - corrected from 41454
   CHAIN_NAME: "Monad Testnet",
   RPC_URL: "https://testnet-rpc.monad.xyz",
-  BLOCK_EXPLORER: "https://testnet-explorer.monad.xyz",
+  BLOCK_EXPLORER: "https://testnet.monadexplorer.com",
   NATIVE_TOKEN: {
-    name: "tMON",
-    symbol: "tMON",
+    name: "MON",
+    symbol: "MON",
     decimals: 18,
   },
 } as const
