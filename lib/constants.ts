@@ -13,7 +13,7 @@ export const CONTRACT_CONFIG = {
   RPC_URL: "https://testnet-rpc.monad.xyz",
   BLOCK_EXPLORER: "https://testnet.monadexplorer.com",
   NATIVE_TOKEN: {
-    name: "MON",
+    name: "Monad", // Updated from "MON" to "Monad"
     symbol: "MON",
     decimals: 18,
   },
