@@ -1,0 +1,390 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: oklch(0.08 0.02 264);
+  --foreground: oklch(0.98 0.02 264);
+  --card: oklch(0.12 0.03 264);
+  --card-foreground: oklch(0.95 0.02 264);
+  --popover: oklch(0.12 0.03 264);
+  --popover-foreground: oklch(0.95 0.02 264);
+  --primary: oklch(0.7 0.25 264);
+  --primary-foreground: oklch(0.98 0.02 264);
+  --secondary: oklch(0.6 0.2 180);
+  --secondary-foreground: oklch(0.98 0.02 180);
+  --muted: oklch(0.15 0.02 264);
+  --muted-foreground: oklch(0.6 0.02 264);
+  --accent: oklch(0.65 0.3 320);
+  --accent-foreground: oklch(0.98 0.02 320);
+  --destructive: oklch(0.6 0.25 15);
+  --destructive-foreground: oklch(0.98 0.02 15);
+  --border: oklch(0.2 0.03 264);
+  --input: oklch(0.15 0.03 264);
+  --ring: oklch(0.7 0.25 264);
+  --chart-1: oklch(0.7 0.25 264);
+  --chart-2: oklch(0.6 0.2 180);
+  --chart-3: oklch(0.65 0.3 320);
+  --chart-4: oklch(0.75 0.2 120);
+  --chart-5: oklch(0.8 0.15 60);
+  --radius: 0.75rem;
+  --sidebar: oklch(0.1 0.02 264);
+  --sidebar-foreground: oklch(0.95 0.02 264);
+  --sidebar-primary: oklch(0.7 0.25 264);
+  --sidebar-primary-foreground: oklch(0.98 0.02 264);
+  --sidebar-accent: oklch(0.15 0.02 264);
+  --sidebar-accent-foreground: oklch(0.95 0.02 264);
+  --sidebar-border: oklch(0.2 0.03 264);
+  --sidebar-ring: oklch(0.7 0.25 264);
+}
+
+.dark {
+  --background: oklch(0.08 0.02 264);
+  --foreground: oklch(0.98 0.02 264);
+  --card: oklch(0.12 0.03 264);
+  --card-foreground: oklch(0.95 0.02 264);
+  --popover: oklch(0.12 0.03 264);
+  --popover-foreground: oklch(0.95 0.02 264);
+  --primary: oklch(0.7 0.25 264);
+  --primary-foreground: oklch(0.98 0.02 264);
+  --secondary: oklch(0.6 0.2 180);
+  --secondary-foreground: oklch(0.98 0.02 180);
+  --muted: oklch(0.15 0.02 264);
+  --muted-foreground: oklch(0.6 0.02 264);
+  --accent: oklch(0.65 0.3 320);
+  --accent-foreground: oklch(0.98 0.02 320);
+  --destructive: oklch(0.6 0.25 15);
+  --destructive-foreground: oklch(0.98 0.02 15);
+  --border: oklch(0.2 0.03 264);
+  --input: oklch(0.15 0.03 264);
+  --ring: oklch(0.7 0.25 264);
+  --chart-1: oklch(0.7 0.25 264);
+  --chart-2: oklch(0.6 0.2 180);
+  --chart-3: oklch(0.65 0.3 320);
+  --chart-4: oklch(0.75 0.2 120);
+  --chart-5: oklch(0.8 0.15 60);
+  --sidebar: oklch(0.1 0.02 264);
+  --sidebar-foreground: oklch(0.95 0.02 264);
+  --sidebar-primary: oklch(0.7 0.25 264);
+  --sidebar-primary-foreground: oklch(0.98 0.02 264);
+  --sidebar-accent: oklch(0.15 0.02 264);
+  --sidebar-accent-foreground: oklch(0.95 0.02 264);
+  --sidebar-border: oklch(0.2 0.03 264);
+  --sidebar-ring: oklch(0.7 0.25 264);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-orbitron);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground overflow-x-hidden;
+  }
+}
+
+/* Added cyberpunk-style custom animations and effects */
+@layer utilities {
+  .glow {
+    box-shadow: 0 0 20px currentColor;
+  }
+
+  .glow-sm {
+    box-shadow: 0 0 10px currentColor;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 10px currentColor;
+  }
+
+  .neon-border {
+    border: 1px solid currentColor;
+    box-shadow: 0 0 5px currentColor, inset 0 0 5px currentColor;
+  }
+
+  .cyber-grid {
+    background-image: linear-gradient(rgba(112, 66, 248, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(112, 66, 248, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #7042f8, #00d4ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* 3D Scene Setup */
+  .scene-3d {
+    perspective: 1000px;
+    perspective-origin: center center;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  /* 3D Text Effects */
+  .text-3d {
+    transform-style: preserve-3d;
+    text-shadow:
+      0 1px 0 #7042f8,
+      0 2px 0 #6038e6,
+      0 3px 0 #502ed4,
+      0 4px 0 #4024c2,
+      0 5px 0 #301ab0,
+      0 6px 1px rgba(0, 0, 0, 0.1),
+      0 0 5px rgba(112, 66, 248, 0.1),
+      0 1px 3px rgba(0, 0, 0, 0.3),
+      0 3px 5px rgba(0, 0, 0, 0.2),
+      0 5px 10px rgba(0, 0, 0, 0.25);
+  }
+
+  /* 3D Geometric Shapes */
+  .cube-3d {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    transform-style: preserve-3d;
+  }
+
+  .cube-face {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border: 2px solid currentColor;
+    background: rgba(112, 66, 248, 0.1);
+    backdrop-filter: blur(10px);
+  }
+
+  .cube-front {
+    transform: rotateY(0deg) translateZ(50px);
+  }
+  .cube-back {
+    transform: rotateY(180deg) translateZ(50px);
+  }
+  .cube-right {
+    transform: rotateY(90deg) translateZ(50px);
+  }
+  .cube-left {
+    transform: rotateY(-90deg) translateZ(50px);
+  }
+  .cube-top {
+    transform: rotateX(90deg) translateZ(50px);
+  }
+  .cube-bottom {
+    transform: rotateX(-90deg) translateZ(50px);
+  }
+
+  /* Floating 3D Objects */
+  .floating-3d {
+    animation: float-3d 6s ease-in-out infinite;
+  }
+
+  .floating-3d-delayed {
+    animation: float-3d 8s ease-in-out infinite;
+    animation-delay: -2s;
+  }
+
+  /* 3D Grid Background */
+  .grid-3d {
+    background-image: linear-gradient(rgba(112, 66, 248, 0.2) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(112, 66, 248, 0.2) 1px, transparent 1px);
+    background-size: 100px 100px;
+    transform: rotateX(60deg) translateZ(-200px);
+    transform-origin: center bottom;
+  }
+
+  /* Holographic Effects */
+  .hologram {
+    background: linear-gradient(45deg, transparent 30%, rgba(112, 66, 248, 0.1) 50%, transparent 70%);
+    background-size: 20px 20px;
+    animation: hologram-scan 3s linear infinite;
+    position: relative;
+  }
+
+  .hologram::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+    animation: hologram-sweep 2s ease-in-out infinite;
+  }
+
+  /* Particle Field */
+  .particle-field {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 50%;
+    animation: particle-float 10s linear infinite;
+  }
+
+  /* Wireframe Effects */
+  .wireframe {
+    border: 1px solid rgba(112, 66, 248, 0.3);
+    background: transparent;
+    position: relative;
+  }
+
+  .wireframe::before,
+  .wireframe::after {
+    content: "";
+    position: absolute;
+    border: 1px solid rgba(0, 212, 255, 0.3);
+  }
+
+  .wireframe::before {
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+  }
+
+  .wireframe::after {
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    border-color: rgba(255, 0, 255, 0.2);
+  }
+}
+
+/* Added 3D animation keyframes */
+@keyframes float-3d {
+  0%,
+  100% {
+    transform: translateY(0px) rotateX(0deg) rotateY(0deg);
+  }
+  25% {
+    transform: translateY(-20px) rotateX(10deg) rotateY(90deg);
+  }
+  50% {
+    transform: translateY(-10px) rotateX(-5deg) rotateY(180deg);
+  }
+  75% {
+    transform: translateY(-30px) rotateX(15deg) rotateY(270deg);
+  }
+}
+
+@keyframes rotate-3d {
+  0% {
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+  100% {
+    transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+  }
+}
+
+@keyframes hologram-scan {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 20px 20px;
+  }
+}
+
+@keyframes hologram-sweep {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes particle-float {
+  0% {
+    transform: translateY(100vh) translateX(0) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) translateX(100px) scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes matrix-rain {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+.animate-rotate-3d {
+  animation: rotate-3d 20s linear infinite;
+}
+
+.animate-matrix-rain {
+  animation: matrix-rain 3s linear infinite;
+}
