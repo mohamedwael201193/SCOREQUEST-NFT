@@ -1,41 +1,54 @@
 class SoundManager {
   private sounds: { [key: string]: HTMLAudioElement } = {}
   private enabled = true
+  private initialized = false
 
   constructor() {
     if (typeof window !== "undefined") {
-      this.loadSounds()
+      this.initializeSounds()
     }
   }
 
-  private loadSounds() {
-    const soundFiles = {
-      hit: "/sounds/hit.mp3",
-      miss: "/sounds/miss.mp3",
-      bonus: "/sounds/bonus.mp3",
-      penalty: "/sounds/penalty.mp3",
-      victory: "/sounds/victory.mp3",
-      gameOver: "/sounds/game-over.mp3",
-      combo: "/sounds/combo.mp3",
-      tick: "/sounds/tick.mp3",
-    }
+  private async initializeSounds() {
+    try {
+      // For now, we'll create silent audio objects to prevent errors
+      // In the future, you can add actual sound files to the /public/sounds/ directory
+      const soundNames = ["hit", "miss", "bonus", "penalty", "victory", "gameOver", "combo", "tick"]
 
-    Object.entries(soundFiles).forEach(([key, src]) => {
-      const audio = new Audio(src)
-      audio.preload = "auto"
-      audio.volume = 0.5
-      this.sounds[key] = audio
-    })
+      soundNames.forEach((name) => {
+        // Create a silent audio element as placeholder
+        const audio = new Audio()
+        audio.volume = 0.5
+        audio.preload = "none"
+        this.sounds[name] = audio
+      })
+
+      this.initialized = true
+    } catch (error) {
+      console.warn("Sound initialization failed:", error)
+      this.enabled = false
+    }
   }
 
   play(soundName: string, volume = 0.5) {
-    if (!this.enabled || !this.sounds[soundName]) return
+    if (!this.enabled || !this.initialized || !this.sounds[soundName]) {
+      return
+    }
 
-    const sound = this.sounds[soundName].cloneNode() as HTMLAudioElement
-    sound.volume = volume
-    sound.play().catch(() => {
-      // Ignore autoplay restrictions
-    })
+    try {
+      // For now, just log the sound that would be played
+      // This prevents errors while keeping the game functional
+      console.log(`🔊 Playing sound: ${soundName} at volume ${volume}`)
+
+      // Uncomment this when you add actual sound files:
+      // const sound = this.sounds[soundName].cloneNode() as HTMLAudioElement
+      // sound.volume = volume
+      // sound.play().catch(() => {
+      //   // Ignore autoplay restrictions
+      // })
+    } catch (error) {
+      console.warn(`Failed to play sound ${soundName}:`, error)
+    }
   }
 
   setEnabled(enabled: boolean) {

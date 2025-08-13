@@ -6,7 +6,6 @@ import { GameOverModal } from "./game-over-modal"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Play, ArrowLeft } from "lucide-react"
-import { GameAnimations } from "@/lib/animations"
 
 interface GameContainerProps {
   onBackToHome: () => void
@@ -21,21 +20,22 @@ export function GameContainer({ onBackToHome }: GameContainerProps) {
 
   const containerRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    if (containerRef.current) {
-      GameAnimations.animateHeroEntrance()
+  const startGame = useCallback(() => {
+    console.log("Starting game...") // Added debug logging
+    try {
+      setGameState("playing")
+      setCurrentScore(0)
+      setFinalScore(0)
+      setGameWon(false)
+      setTimeTaken(0)
+      console.log("Game state set to playing") // Added debug logging
+    } catch (error) {
+      console.error("Error starting game:", error) // Added error handling
     }
   }, [])
 
-  const startGame = useCallback(() => {
-    setGameState("playing")
-    setCurrentScore(0)
-    setFinalScore(0)
-    setGameWon(false)
-    setTimeTaken(0)
-  }, [])
-
   const handleGameEnd = useCallback((score: number, won: boolean, gameTime: number) => {
+    console.log("Game ended:", { score, won, gameTime }) // Added debug logging
     setFinalScore(score)
     setGameWon(won)
     setTimeTaken(gameTime)
@@ -49,6 +49,10 @@ export function GameContainer({ onBackToHome }: GameContainerProps) {
   const handleScoreChange = useCallback((score: number) => {
     setCurrentScore(score)
   }, [])
+
+  useEffect(() => {
+    console.log("Game state changed to:", gameState)
+  }, [gameState])
 
   if (gameState === "waiting") {
     return (
@@ -105,6 +109,30 @@ export function GameContainer({ onBackToHome }: GameContainerProps) {
     )
   }
 
+  if (gameState === "playing") {
+    return (
+      <div className="min-h-screen bg-background cyber-grid">
+        <div className="container mx-auto px-6 py-8">
+          <div className="flex items-center justify-between mb-8">
+            <Button
+              onClick={onBackToHome}
+              variant="ghost"
+              className="font-display text-primary hover:text-primary-foreground"
+            >
+              <ArrowLeft className="mr-2 h-5 w-5" />
+              Back to Home
+            </Button>
+            <h1 className="font-display text-3xl font-bold gradient-text">SCOREQUEST NFT - ACTIVE</h1>
+            <div className="w-24"></div> {/* Spacer for centering */}
+          </div>
+
+          <EnhancedGameArea onGameEnd={handleGameEnd} onScoreChange={handleScoreChange} />
+        </div>
+      </div>
+    )
+  }
+
+  // Game ended state
   return (
     <div className="min-h-screen bg-background cyber-grid">
       <div className="container mx-auto px-6 py-8">
@@ -117,11 +145,9 @@ export function GameContainer({ onBackToHome }: GameContainerProps) {
             <ArrowLeft className="mr-2 h-5 w-5" />
             Back to Home
           </Button>
-          <h1 className="font-display text-3xl font-bold gradient-text">MISSION 7 - ACTIVE</h1>
-          <div className="w-24"></div> {/* Spacer for centering */}
+          <h1 className="font-display text-3xl font-bold gradient-text">GAME COMPLETE</h1>
+          <div className="w-24"></div>
         </div>
-
-        {gameState === "playing" && <EnhancedGameArea onGameEnd={handleGameEnd} onScoreChange={handleScoreChange} />}
 
         <GameOverModal
           isOpen={gameState === "ended"}
