@@ -1,3 +1,4 @@
+-- Adding RLS policies for proper security
 -- Create leaderboard table for storing game scores
 CREATE TABLE IF NOT EXISTS leaderboard (
   id SERIAL PRIMARY KEY,
@@ -10,6 +11,17 @@ CREATE TABLE IF NOT EXISTS leaderboard (
 
 -- Create index for faster queries
 CREATE INDEX IF NOT EXISTS idx_leaderboard_score ON leaderboard(score DESC, time_taken ASC);
+
+-- Enable Row Level Security
+ALTER TABLE leaderboard ENABLE ROW LEVEL SECURITY;
+
+-- Create policy to allow public read access
+CREATE POLICY IF NOT EXISTS "Allow public read access" ON leaderboard
+  FOR SELECT USING (true);
+
+-- Create policy to allow public insert access
+CREATE POLICY IF NOT EXISTS "Allow public insert access" ON leaderboard
+  FOR INSERT WITH CHECK (true);
 
 -- Insert some sample data for testing
 INSERT INTO leaderboard (player_name, wallet_address, score, time_taken) VALUES
