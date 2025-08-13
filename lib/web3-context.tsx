@@ -75,15 +75,26 @@ export function Web3Provider({ children }: Web3ProviderProps) {
 
     try {
       setError(null)
+      console.log("Attempting to switch to chain ID:", CONTRACT_CONFIG.CHAIN_ID)
+      console.log("Chain ID in hex:", `0x${CONTRACT_CONFIG.CHAIN_ID.toString(16)}`)
+
       // Try to switch to Monad Testnet
       await window.ethereum.request({
         method: "wallet_switchEthereumChain",
         params: [{ chainId: `0x${CONTRACT_CONFIG.CHAIN_ID.toString(16)}` }],
       })
     } catch (switchError: any) {
+      console.log("Switch error:", switchError)
       // If the chain doesn't exist, add it
       if (switchError.code === 4902) {
         try {
+          console.log("Adding Monad Testnet with config:", {
+            chainId: `0x${CONTRACT_CONFIG.CHAIN_ID.toString(16)}`,
+            chainName: CONTRACT_CONFIG.CHAIN_NAME,
+            rpcUrls: [CONTRACT_CONFIG.RPC_URL],
+            blockExplorerUrls: [CONTRACT_CONFIG.BLOCK_EXPLORER],
+          })
+
           await window.ethereum.request({
             method: "wallet_addEthereumChain",
             params: [
